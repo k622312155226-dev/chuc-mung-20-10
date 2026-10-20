@@ -115,6 +115,27 @@ h1 .name{font-family:var(--f-script);font-weight:700;font-size:clamp(2.8rem,11vw
 @keyframes floatUp{0%{opacity:0;transform:translate(-50%,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx,0px)),-70px) scale(1.1)}}
 .hint{font-size:.88rem;color:var(--ink-soft);background:rgba(255,251,250,.75);padding:6px 14px;border-radius:999px;margin:0;text-align:center}
 
+.letter{max-width:640px;margin:72px auto 0}
+.letter header{text-align:center;margin-bottom:34px}
+.letter h2{font-family:var(--f-script);font-size:clamp(2.3rem,8vw,3.4rem);color:var(--sofia-deep);margin:.15em 0 0;font-weight:700;line-height:1.1}
+.paper{
+  position:relative;background-color:var(--paper);
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,rgba(212,111,139,.14) 31px,rgba(212,111,139,.14) 32px);
+  background-position:0 clamp(52px,9vw,72px);
+  border-radius:6px;
+  padding:clamp(52px,9vw,72px) clamp(22px,6vw,52px) clamp(32px,6vw,48px);
+  box-shadow:0 26px 50px -26px rgba(120,40,60,.5),0 2px 8px rgba(120,40,60,.1);
+  transform:rotate(-.6deg);
+}
+.paper::before{content:"";position:absolute;top:0;bottom:0;left:clamp(14px,4vw,30px);width:1px;background:rgba(212,111,139,.3)}
+.seal{position:absolute;top:-24px;left:50%;transform:translateX(-50%) rotate(-8deg);width:56px;height:56px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#EFA0B3,#C9637E 70%);box-shadow:0 6px 14px -4px rgba(140,50,75,.6),inset 0 -3px 6px rgba(0,0,0,.15);display:grid;place-items:center}
+.seal svg{width:30px;height:30px}
+.paper .greet{font-family:var(--f-script);font-weight:700;font-size:clamp(1.8rem,6vw,2.2rem);color:var(--sofia-deep);margin:0 0 16px;line-height:32px}
+.paper p{margin:0 0 32px;font-size:1.04rem;line-height:32px;color:var(--ink);max-width:62ch}
+.paper .closing{margin:0;font-family:var(--f-script);font-size:1.6rem;line-height:32px;color:var(--ink-soft);text-align:right}
+.paper .from{margin:0;font-family:var(--f-script);font-weight:700;font-size:clamp(1.6rem,5.5vw,2rem);line-height:44px;color:var(--sofia-deep);text-align:right}
+
 .album{max-width:980px;margin:72px auto 0}
 .album header{text-align:center;margin-bottom:30px}
 .album h2{font-family:var(--f-script);font-size:clamp(2.3rem,8vw,3.4rem);color:var(--sofia-deep);margin:.15em 0 0;font-weight:700;line-height:1.1}
@@ -223,6 +244,22 @@ h1 .name{font-family:var(--f-script);font-weight:700;font-size:clamp(2.8rem,11vw
       <div class="cats" id="cats"></div>
       <p class="hint">Chạm vào bất kỳ đâu để trồng thêm một bông hồng Sofia, chạm vào mèo để mèo nhảy</p>
     </div>
+  </section>
+
+  <section class="letter" aria-labelledby="letter-title">
+    <header>
+      <p class="eyebrow">Một lá thư nhỏ</p>
+      <h2 id="letter-title">Thư gửi bé mèow</h2>
+    </header>
+    <article class="paper">
+      <span class="seal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21C5 15.5 2 12.3 2 8.6 2 5.8 4.2 3.6 7 3.6c1.9 0 3.5 1 5 2.9 1.5-1.9 3.1-2.9 5-2.9 2.8 0 5 2.2 5 5 0 3.7-3 6.9-10 12.4Z" fill="#FDE6EA"/></svg></span>
+      <p class="greet">Dear my babe,</p>
+      <p>Anh chúc em có một ngày 20/10 thật vui vẻ, luôn luôn xinh đẹp và luôn tràn đầy năng lượng, chúc em vạn sự như ý, luôn luôn đạt ước nguyện của mình.</p>
+      <p>Hôm nay là một ngày quan trọng và là một ngày đặc biệt nên anh em bé của anh hãy cười thật tươi, chụp thật nhiều ảnh đẹp, luôn luôn tích cực không chỉ mỗi hôm nay mà hãy tích cực cho tất cả những ngày sau này em nhé!</p>
+      <p>Một lần nữa xin được chúc em một ngày 20/10 thật vui tươi và luôn rạng ngời! Anh yêu em</p>
+      <p class="closing">Thương,</p>
+      <p class="from">Phan Trần Bảo Văn</p>
+    </article>
   </section>
 
   <section class="album" aria-labelledby="album-title">
@@ -731,7 +768,7 @@ h1 .name{font-family:var(--f-script);font-weight:700;font-size:clamp(2.8rem,11vw
   /* ---------- tap to plant ---------- */
   document.addEventListener('click', e => {
     if (!opened) return;
-    if (e.target.closest('button, a, .lb, .cover')) return;
+    if (e.target.closest('button, a, .lb, .cover, .paper')) return;
     addRose(headRose(e.clientX / W, e.clientY / H));
     burst(e.clientX, e.clientY, 9, true);
     bump(1);
