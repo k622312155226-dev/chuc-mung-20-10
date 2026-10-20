@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Một tấm thiệp nhỏ gửi Bé mèow xinh nhân ngày 20/10">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
+<title>Thiệp Bé Mèow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@1,400;1,500&display=swap">
+<style>
+/* Layout: one centered column floating over a fixed Sofia-rose garden canvas — card, dancing-cat stage, polaroid album, stacked */
+:root{
+  --bg:#FFF3F5;
+  --bg-deep:#FBDDE4;
+  --peach:#FCE6DF;
+  --paper:#FFFBFA;
+  --ink:#5B2435;
+  --ink-soft:#8C5667;
+  --sofia:#F1A7B8;
+  --sofia-deep:#D46F8B;
+  --leaf:#6F8F5F;
+  --f-script:'Dancing Script','Segoe Script','Brush Script MT',cursive;
+  --f-display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --f-body:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-tap-highlight-color:transparent}
+body{
+  background-color:var(--bg);
+  background-image:radial-gradient(120% 70% at 50% 0%,var(--bg-deep) 0%,transparent 60%),radial-gradient(90% 60% at 100% 100%,var(--peach) 0%,transparent 60%);
+  background-attachment:fixed;
+  color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  overflow-x:hidden;min-height:100%;
+}
+.layer{position:fixed;inset:0;pointer-events:none}
+#garden{z-index:0}
+#fx{z-index:3}
+
+main{
+  position:relative;z-index:2;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:48px 140px;
+}
+.hero{display:flex;flex-direction:column;align-items:center;gap:26px;max-width:640px;margin:0 auto}
+.card{
+  width:100%;text-align:center;
+  background:rgba(255,251,250,.82);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border:1px solid rgba(212,111,139,.25);border-radius:28px;
+  padding:clamp(24px,5vw,44px);
+  box-shadow:0 22px 50px -22px rgba(150,60,85,.38);
+}
+.eyebrow{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin:0}
+h1{margin:.5em 0 .1em;font-weight:400;line-height:1.05;text-wrap:balance}
+h1 .to{display:block;font-family:var(--f-display);font-style:italic;font-size:clamp(1.1rem,3vw,1.35rem);color:var(--ink-soft);margin-bottom:.15em}
+h1 .name{font-family:var(--f-script);font-weight:700;font-size:clamp(2.8rem,11vw,4.8rem);color:var(--sofia-deep)}
+.wish{
+  font-family:var(--f-display);font-style:italic;font-weight:400;
+  font-size:clamp(1.2rem,3.6vw,1.6rem);line-height:1.5;
+  max-width:28ch;margin:18px auto 6px;min-height:4.5em;
+  display:flex;align-items:center;justify-content:center;text-wrap:balance;
+  transition:opacity .25s ease,transform .25s ease;
+}
+.wish.out{opacity:0;transform:translateY(8px)}
+.sign{font-family:var(--f-script);font-size:1.55rem;color:var(--sofia-deep);margin:0 0 22px}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{
+  font:600 1rem/1 var(--f-body);border-radius:999px;padding:14px 22px;
+  border:1.5px solid var(--sofia-deep);cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;
+  transition:transform .15s ease,box-shadow .2s ease,background .2s ease;
+}
+.btn svg{width:20px;height:20px;flex:none}
+.btn.primary{background:linear-gradient(180deg,#F5B6C4,#DE7F99);color:#fff;border-color:transparent;box-shadow:0 12px 26px -12px rgba(200,80,110,.8)}
+.btn.ghost{background:rgba(255,255,255,.7);color:var(--sofia-deep)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.95)}
+.btn:focus-visible,.polaroid:focus-visible,.cat:focus-visible,.music:focus-visible,.lb-btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.btn.pop{animation:pop .5s ease}
+@keyframes pop{40%{transform:scale(1.1)}}
+.count{margin:16px 0 0;font-size:.9rem;color:var(--ink-soft)}
+.count b{color:var(--sofia-deep);font-variant-numeric:tabular-nums;font-weight:600}
+
+.stage{width:100%;display:flex;flex-direction:column;align-items:center;gap:10px}
+.cats{display:flex;justify-content:center;align-items:flex-end;gap:clamp(2px,3vw,26px);flex-wrap:wrap;width:100%}
+.cat{position:relative;background:none;border:0;padding:0;cursor:pointer;width:clamp(66px,19vw,104px);border-radius:16px}
+.cat svg{display:block;width:100%;height:auto;overflow:visible;transform-origin:50% 100%}
+.cat .tail{transform-box:view-box;transform-origin:86px 128px;animation:wag 1.1s ease-in-out infinite alternate}
+.cat .eyes{transform-box:view-box;transform-origin:60px 52px;animation:blink 4.2s infinite}
+.cat .head{transform-box:view-box;transform-origin:60px 82px;animation:tilt 1.7s ease-in-out infinite alternate}
+.d-bounce svg{animation:bounce .62s ease-in-out infinite alternate}
+.d-sway svg{animation:sway 1.1s ease-in-out infinite alternate}
+.d-hop svg{animation:hop 1.3s ease-in-out infinite}
+.d-wiggle svg{animation:wiggle 1.6s ease-in-out infinite}
+.cat:nth-child(2) .tail{animation-duration:.8s}
+.cat:nth-child(3) .eyes{animation-delay:1.3s}
+.cat:nth-child(4) .head{animation-delay:.6s}
+.cat.jump svg{animation:jump .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes wag{from{transform:rotate(-14deg)}to{transform:rotate(16deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes tilt{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+@keyframes bounce{from{transform:translateY(0) scale(1.05,.95)}to{transform:translateY(-16px) scale(.97,1.03)}}
+@keyframes sway{from{transform:rotate(-10deg)}to{transform:rotate(10deg)}}
+@keyframes hop{0%,55%,100%{transform:translateY(0)}25%{transform:translateY(-26px) rotate(-8deg)}40%{transform:translateY(0) scale(1.06,.94)}}
+@keyframes wiggle{0%,100%{transform:translateX(0) rotate(0)}20%{transform:translateX(-6px) rotate(-8deg)}40%{transform:translateX(6px) rotate(8deg)}60%{transform:translateY(-12px) rotate(0)}80%{transform:translateY(0) rotate(360deg)}}
+@keyframes jump{0%{transform:translateY(0)}45%{transform:translateY(-44px) rotate(-12deg) scale(1.08)}100%{transform:translateY(0)}}
+.meow{position:absolute;top:-22px;left:50%;background:#fff;color:var(--sofia-deep);font:600 .8rem/1 var(--f-body);padding:6px 10px;border-radius:999px;white-space:nowrap;pointer-events:none;box-shadow:0 4px 12px -4px rgba(150,60,85,.4);animation:bubble 1.3s ease forwards}
+@keyframes bubble{0%{opacity:0;transform:translate(-50%,8px) scale(.6)}20%{opacity:1;transform:translate(-50%,0) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-14px)}}
+.float-heart{position:absolute;top:8%;left:50%;width:18px;height:18px;pointer-events:none;animation:floatUp 1.8s ease-out forwards}
+@keyframes floatUp{0%{opacity:0;transform:translate(-50%,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx,0px)),-70px) scale(1.1)}}
+.hint{font-size:.88rem;color:var(--ink-soft);background:rgba(255,251,250,.75);padding:6px 14px;border-radius:999px;margin:0;text-align:center}
+
+.album{max-width:980px;margin:72px auto 0}
+.album header{text-align:center;margin-bottom:30px}
+.album h2{font-family:var(--f-script);font-size:clamp(2.3rem,8vw,3.4rem);color:var(--sofia-deep);margin:.15em 0 0;font-weight:700;line-height:1.1}
+.sub{color:var(--ink-soft);margin:4px 0 0;font-size:.95rem}
+.polaroids{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:clamp(18px,3.5vw,30px);padding:12px 4px}
+.polaroid{
+  min-width:0;position:relative;background:#fff;border:0;padding:9px 9px 36px;cursor:zoom-in;
+  box-shadow:0 14px 28px -16px rgba(120,40,60,.5),0 2px 6px rgba(120,40,60,.12);
+  transform:rotate(var(--r,0deg));transition:transform .3s ease,box-shadow .3s ease;
+}
+.polaroid img{display:block;width:100%;max-width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bg-deep)}
+.polaroid::before{content:"";position:absolute;top:-10px;left:50%;width:62px;height:20px;transform:translateX(-50%) rotate(var(--tr,-3deg));background:rgba(241,167,184,.7)}
+.polaroid .cap{position:absolute;left:0;right:0;bottom:7px;text-align:center;font-family:var(--f-script);font-size:1.2rem;line-height:1;color:var(--ink-soft)}
+.polaroid:hover{transform:rotate(0deg) scale(1.04);z-index:1;box-shadow:0 22px 36px -16px rgba(120,40,60,.55)}
+
+.end{text-align:center;margin:72px auto 0;max-width:520px}
+.end .big{font-family:var(--f-script);font-size:clamp(2rem,7vw,2.8rem);color:var(--sofia-deep);margin:0;line-height:1.1}
+.end .small{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin:8px 0 0}
+
+.parade{position:fixed;left:0;right:0;bottom:0;height:0;z-index:1;pointer-events:none}
+.walker{position:absolute;left:0;bottom:calc(4px + env(safe-area-inset-bottom,0px));width:56px;transform:translateX(-90px);animation:walk 20s linear 3s infinite}
+.walker svg{display:block;width:100%;height:auto;animation:hopping .42s ease-in-out infinite alternate;transform-origin:50% 100%}
+.walker .tail{transform-box:view-box;transform-origin:86px 128px;animation:wag .5s ease-in-out infinite alternate}
+@keyframes walk{from{transform:translateX(-90px)}to{transform:translateX(calc(100vw + 90px))}}
+@keyframes hopping{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-10px) rotate(5deg)}}
+
+.music{
+  position:fixed;z-index:4;
+  right:calc(16px + env(safe-area-inset-right,0px));
+  bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--paper);color:var(--sofia-deep);
+  box-shadow:0 10px 24px -10px rgba(150,60,85,.6);
+  display:grid;place-items:center;
+}
+.music .bars{display:flex;gap:3px;align-items:flex-end;height:18px}
+.music .bars i{display:block;width:4px;border-radius:2px;background:currentColor;height:6px}
+.music.on .bars i{animation:eq .9s ease-in-out infinite alternate}
+.music.on .bars i:nth-child(2){animation-delay:-.3s}
+.music.on .bars i:nth-child(3){animation-delay:-.6s}
+@keyframes eq{from{height:4px}to{height:18px}}
+.music .label{position:absolute;right:60px;white-space:nowrap;font-size:.78rem;color:var(--ink-soft);background:rgba(255,251,250,.85);padding:4px 10px;border-radius:999px;pointer-events:none}
+
+.lb{
+  position:fixed;inset:0;z-index:40;background:rgba(60,20,32,.86);
+  display:flex;align-items:center;justify-content:center;
+  padding:calc(64px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(76px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border:8px solid #fff;border-bottom-width:28px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.lb-btn{position:absolute;width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;background:rgba(255,251,250,.92);color:var(--ink);font:500 1.6rem/1 var(--f-body);display:grid;place-items:center}
+.lb-close{top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px))}
+.lb-prev{left:calc(12px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.lb-next{right:calc(12px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+@media (min-width:700px){.lb-prev,.lb-next{bottom:auto;top:50%;transform:translateY(-50%)}}
+
+.cover{
+  position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:calc(24px + env(safe-area-inset-top,0px)) calc(24px + env(safe-area-inset-bottom,0px));
+  background:rgba(255,238,242,.84);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  transition:opacity .9s ease,visibility .9s ease;overflow-y:auto;
+}
+.cover.gone{opacity:0;visibility:hidden}
+.cover-wrap{position:relative;width:min(400px,100%);padding-top:72px}
+.cover-cat{position:absolute;top:0;left:50%;width:124px;transform:translateX(-50%);z-index:0}
+.cover-cat svg{display:block;width:100%;height:auto}
+.cover-card{position:relative;z-index:1;background:var(--paper);border-radius:28px;padding:30px 24px 26px;text-align:center;border:1px solid rgba(212,111,139,.22);box-shadow:0 26px 60px -26px rgba(150,60,85,.5)}
+.paw{position:absolute;top:-7px;width:22px;height:14px;border-radius:50%;background:#F6E7D8;box-shadow:0 2px 0 rgba(150,60,85,.12)}
+.paw.l{left:calc(50% - 30px)}.paw.r{left:calc(50% + 8px)}
+#coverRose{width:120px;height:120px;display:block;margin:4px auto 0}
+.cover-card .lead{font-family:var(--f-display);font-style:italic;color:var(--ink-soft);margin:10px 0 0;font-size:1.1rem}
+.cover-card .name{font-family:var(--f-script);font-weight:700;color:var(--sofia-deep);font-size:clamp(2.6rem,12vw,3.4rem);line-height:1.1;margin:0 0 20px}
+.cover-card .note{font-size:.85rem;color:var(--ink-soft);margin:14px 0 0}
+
+@media (prefers-reduced-motion:reduce){
+  .cat svg,.cat .tail,.cat .eyes,.cat .head,.walker svg,.walker .tail{animation:none!important}
+  .walker{display:none}
+  .wish,.cover{transition:none}
+}
+</style>
+</head>
+<body>
+
+
+<canvas id="garden" class="layer" aria-hidden="true"></canvas>
+<div class="parade" aria-hidden="true"><div class="walker" id="walker"></div></div>
+
+<main id="page">
+  <section class="hero">
+    <div class="card">
+      <p class="eyebrow">20 · 10 · Ngày Phụ nữ Việt Nam</p>
+      <h1><span class="to">Gửi</span><span class="name">Bé mèow xinh</span></h1>
+      <p class="wish" id="wish" aria-live="polite">Anh chúc bé mèow của anh một ngày 20/10 thật sự vui tươi và tràn đầy tiếng cười</p>
+      <p class="sign">Anh của bé mèow</p>
+      <div class="actions">
+        <button class="btn primary" id="bloom" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 13.5c3 0 5-2.2 5-5.2 0-1.6-.8-3-2-3.8-.4 1.3-1.6 2.2-3 2.2s-2.6-.9-3-2.2c-1.2.8-2 2.2-2 3.8 0 3 2 5.2 5 5.2Z" fill="currentColor"/><path d="M12 13.5V21M12 17.5c-2.5 0-4-1.4-4.5-3.2 2 0 3.6.9 4.5 3.2Zm0 0c2.5 0 4-1.4 4.5-3.2-2 0-3.6.9-4.5 3.2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Nở thêm hoa
+        </button>
+        <button class="btn ghost" id="next" type="button">Lời chúc khác</button>
+      </div>
+      <p class="count"><b id="count">0</b> bông hồng Sofia đã nở cho bé mèow</p>
+    </div>
+
+    <div class="stage">
+      <div class="cats" id="cats"></div>
+      <p class="hint">Chạm vào bất kỳ đâu để trồng thêm một bông hồng Sofia, chạm vào mèo để mèo nhảy</p>
+    </div>
+  </section>
+
+  <section class="album" aria-labelledby="album-title">
+    <header>
+      <p class="eyebrow">Album nhỏ</p>
+      <h2 id="album-title">Bé mèow của anh</h2>
+      <p class="sub">Chạm vào ảnh để xem lớn</p>
+    </header>
+    <div class="polaroids" id="pol"></div>
+  </section>
+
+  <footer class="end">
+    <p class="big">Thương bé mèow nhiều</p>
+    <p class="small">20 · 10 · 2026</p>
+  </footer>
+</main>
+
+<canvas id="fx" class="layer" aria-hidden="true"></canvas>
+
+<button class="music" id="music" type="button" aria-label="Bật nhạc" hidden>
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+</button>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Xem ảnh" hidden>
+  <img id="lbImg" alt="">
+  <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="Đóng">×</button>
+  <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Ảnh trước">‹</button>
+  <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Ảnh sau">›</button>
+</div>
+
+<div class="cover" id="cover">
+  <div class="cover-wrap">
+    <div class="cover-cat" id="coverCat" aria-hidden="true"></div>
+    <div class="cover-card">
+      <span class="paw l" aria-hidden="true"></span><span class="paw r" aria-hidden="true"></span>
+      <p class="eyebrow">20 · 10 · Ngày Phụ nữ Việt Nam</p>
+      <canvas id="coverRose" aria-hidden="true"></canvas>
+      <p class="lead">Một tấm thiệp nhỏ gửi</p>
+      <p class="name">Bé mèow xinh</p>
+      <button class="btn primary" id="open" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5 12 13l9-5.5M4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11A1.5 1.5 0 0 1 4.5 5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        Mở thiệp
+      </button>
+      <p class="note">Có nhạc nền, bật loa lên nhé</p>
+    </div>
+  </div>
+</div>
+
+<audio id="audio" src="nhac-nen.mp3" loop preload="auto"></audio>
+
+<script>
+(() => {
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s);
+  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const TAU = Math.PI * 2;
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  /* ---------- Sofia rose palettes: soft blush pink, a peachy one, a pale one, a deeper one ---------- */
+  const PALS = [
+    { edge: '#FDE6EA', mid: '#F6BCC9', base: '#EA8FA5', deep: '#C9637E' },
+    { edge: '#FFEDE6', mid: '#F9CBBF', base: '#EF9FA0', deep: '#CF6F7E' },
+    { edge: '#FFF2F4', mid: '#F8CBD5', base: '#EEA2B4', deep: '#D27891' },
+    { edge: '#FBD9E1', mid: '#F1A2B6', base: '#E07592', deep: '#B9506D' }
+  ];
+  const pickPal = () => { const r = Math.random(); return PALS[r < .45 ? 0 : r < .7 ? 2 : r < .87 ? 1 : 3]; };
+
+  function petalPath(ctx, len, w) {
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(-w, -len * .2, -w * 1.08, -len * .85, -len * .24, -len * .98);
+    ctx.quadraticCurveTo(0, -len * .9, len * .24, -len * .98);
+    ctx.bezierCurveTo(w * 1.08, -len * .85, w, -len * .2, 0, 0);
+  }
+
+  const LAY = [[7, 1, 0], [6, .8, .45], [5, .62, .15], [5, .46, .7], [4, .31, .3]];
+  function drawRose(ctx, x, y, R, p, rot, pal) {
+    if (p <= 0) return;
+    const grow = .35 + .65 * easeOut(clamp(p * 1.6));
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    for (let li = 0; li < LAY.length; li++) {
+      const [n, s, off] = LAY[li];
+      const inner = li >= 3;
+      const delay = (LAY.length - 1 - li) * .11;
+      const o = easeOut(clamp((p - delay) / (1 - delay)));
+      if (!inner && o <= 0) continue;
+      const len = R * s * grow * (inner ? 1 : (.3 + .7 * o));
+      const w = len * (inner ? .62 : .58 + .12 * o);
+      ctx.globalAlpha = inner ? 1 : clamp(o * 2.5);
+      if (li < 2) { ctx.shadowColor = 'rgba(140,50,75,.22)'; ctx.shadowBlur = R * .12; ctx.shadowOffsetY = R * .03; }
+      else { ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0; }
+      for (let k = 0; k < n; k++) {
+        ctx.save();
+        ctx.rotate(off + k * TAU / n + (1 - o) * .35);
+        const g = ctx.createLinearGradient(0, 0, 0, -len);
+        g.addColorStop(0, inner ? pal.deep : pal.base);
+        g.addColorStop(.6, inner ? pal.base : pal.mid);
+        g.addColorStop(1, inner ? pal.mid : pal.edge);
+        ctx.fillStyle = g;
+        petalPath(ctx, len, w);
+        ctx.fill();
+        ctx.shadowColor = 'transparent';
+        ctx.strokeStyle = 'rgba(160,60,90,.22)';
+        ctx.lineWidth = .7;
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+    ctx.globalAlpha = 1; ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+    const cr = R * .17 * grow;
+    const cg = ctx.createRadialGradient(-cr * .3, -cr * .3, cr * .1, 0, 0, cr);
+    cg.addColorStop(0, pal.base); cg.addColorStop(1, pal.deep);
+    ctx.fillStyle = cg;
+    ctx.beginPath(); ctx.arc(0, 0, cr, 0, TAU); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,235,240,.7)';
+    ctx.lineWidth = Math.max(.8, R * .025);
+    ctx.beginPath();
+    for (let t = 0; t <= Math.PI * 4; t += .25) {
+      const rr = cr * .95 * t / (Math.PI * 4);
+      const px = Math.cos(t) * rr, py = Math.sin(t) * rr;
+      t === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawLeaf(ctx, x, y, len, ang) {
+    if (len <= 0) return;
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(ang);
+    const g = ctx.createLinearGradient(0, -len * .3, 0, len * .3);
+    g.addColorStop(0, '#8DB07A'); g.addColorStop(1, '#56774A');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.quadraticCurveTo(len * .5, -len * .38, len, 0);
+    ctx.quadraticCurveTo(len * .5, len * .38, 0, 0);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(235,245,225,.55)';
+    ctx.lineWidth = .8;
+    ctx.beginPath(); ctx.moveTo(len * .08, 0); ctx.lineTo(len * .9, 0); ctx.stroke();
+    ctx.restore();
+  }
+
+  /* ---------- canvases ---------- */
+  const garden = $('#garden'), gctx = garden.getContext('2d');
+  const fx = $('#fx'), fctx = fx.getContext('2d');
+  const stat = document.createElement('canvas'), sctx = stat.getContext('2d');
+  let W = innerWidth, H = innerHeight;
+  const K = () => clamp(Math.min(W, H) / 760, .72, 1.2);
+
+  const STEM = 900, BLOOM = 1900, MAX = 110;
+  let roses = [], live = [], gardenDirty = true;
+
+  function stemGeom(r) {
+    const x = r.x * W, y = r.y * H, bx = r.bx * W, by = H + 14;
+    return { x, y, bx, by, cx: bx + (x - bx) * .15 + r.curve * W, cy: (by + y) / 2 };
+  }
+  function qpt(g, t) { const u = 1 - t; return [u * u * g.bx + 2 * u * t * g.cx + t * t * g.x, u * u * g.by + 2 * u * t * g.cy + t * t * g.y]; }
+  function drawStem(ctx, r, sp) {
+    const g = stemGeom(r);
+    ctx.save();
+    ctx.strokeStyle = '#6E8F5E';
+    ctx.lineWidth = Math.max(2.5, r.R * .13);
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(g.bx, g.by);
+    const N = 28;
+    for (let i = 1; i <= N * sp; i++) { const [px, py] = qpt(g, i / N); ctx.lineTo(px, py); }
+    const [ex, ey] = qpt(g, sp); ctx.lineTo(ex, ey);
+    ctx.stroke();
+    for (const [lt, side] of r.leaves) {
+      if (sp > lt) {
+        const s = clamp((sp - lt) / .25);
+        const [px, py] = qpt(g, lt), [qx, qy] = qpt(g, lt + .02);
+        drawLeaf(ctx, px, py, r.R * 1.15 * easeOut(s), Math.atan2(qy - py, qx - px) + side * .95);
+      }
+    }
+    ctx.restore();
+  }
+  function roseState(r, t) {
+    const e = t - r.t0;
+    const sp = r.stem ? clamp(e / STEM) : 1;
+    const bp = clamp((e - (r.stem ? STEM * .8 : 0)) / BLOOM);
+    return [sp, bp];
+  }
+  function renderRose(ctx, r, t) {
+    const [sp, bp] = roseState(r, t);
+    const x = r.x * W, y = r.y * H;
+    if (r.stem) drawStem(ctx, r, easeOut(sp));
+    else if (bp > 0) {
+      const s = easeOut(clamp(bp * 1.5));
+      drawLeaf(ctx, x, y, r.R * 1.3 * s, r.la);
+      drawLeaf(ctx, x, y, r.R * 1.15 * s, r.la + 1.5);
+    }
+    if (bp > 0) drawRose(ctx, x, y, r.R, bp, r.rot, r.pal);
+  }
+  function redrawStatic() {
+    sctx.clearRect(0, 0, W, H);
+    for (const r of roses) if (r.done) renderRose(sctx, r, 1e12);
+    gardenDirty = true;
+  }
+  function addRose(o) {
+    const r = Object.assign({ t0: performance.now() + (o.delay || 0) }, o);
+    if (RM) r.t0 -= 10000;
+    roses.push(r); live.push(r);
+    if (roses.length > MAX) {
+      const i = roses.findIndex(q => q.done);
+      if (i >= 0) { roses.splice(i, 1); redrawStatic(); }
+    }
+  }
+  const stemRose = (x, y, extra = {}) => Object.assign({
+    stem: true, x, y, bx: x + rand(-.05, .05), curve: rand(-.03, .03),
+    R: rand(20, 34) * K(), rot: rand(0, TAU), pal: pickPal(),
+    leaves: [[rand(.3, .45), -1], [rand(.55, .7), 1]]
+  }, extra);
+  const headRose = (x, y, extra = {}) => Object.assign({
+    stem: false, x, y, R: rand(18, 28) * K(), rot: rand(0, TAU), pal: pickPal(), la: rand(0, TAU)
+  }, extra);
+
+  /* ---------- petals ---------- */
+  function makeSprite(draw) { const c = document.createElement('canvas'); c.width = c.height = 64; draw(c.getContext('2d')); return c; }
+  const petalSprites = [['#EA8FA5', '#FDE6EA'], ['#EF9FA0', '#FFEDE6'], ['#E07592', '#FBD9E1'], ['#EEA2B4', '#FFF2F4']].map(([a, b]) => makeSprite(x => {
+    x.translate(32, 60);
+    const g = x.createLinearGradient(0, 0, 0, -56); g.addColorStop(0, a); g.addColorStop(1, b);
+    x.fillStyle = g; petalPath(x, 56, 25); x.fill();
+  }));
+  const heartSprite = makeSprite(x => {
+    x.translate(32, 34); x.fillStyle = '#E07592'; x.beginPath();
+    x.moveTo(0, 18); x.bezierCurveTo(-30, -2, -18, -26, 0, -10); x.bezierCurveTo(18, -26, 30, -2, 0, 18); x.fill();
+  });
+  let parts = [];
+  const ambientTarget = () => RM ? 6 : (W < 600 ? 14 : 24);
+  function spawnAmbient(anyY) {
+    parts.push({ x: rand(0, W), y: anyY ? rand(0, H) : -30, vx: rand(-.3, .3), vy: rand(.45, 1.1) * (RM ? .5 : 1), g: 0,
+      rot: rand(0, TAU), vr: rand(-.02, .02), flip: rand(0, TAU), vf: rand(.02, .05), s: rand(12, 22), spr: petalSprites[(Math.random() * 4) | 0],
+      ph: rand(0, TAU), ambient: true });
+  }
+  function burst(x, y, n, hearts) {
+    if (RM) n = Math.ceil(n / 3);
+    for (let i = 0; i < n; i++) {
+      const heart = hearts && Math.random() < .25;
+      parts.push({ x, y, vx: rand(-3.2, 3.2), vy: rand(-6.5, -2), g: .13, rot: rand(0, TAU), vr: rand(-.08, .08),
+        flip: rand(0, TAU), vf: heart ? 0 : rand(.04, .09), s: heart ? rand(12, 18) : rand(12, 22),
+        spr: heart ? heartSprite : petalSprites[(Math.random() * 4) | 0], ph: rand(0, TAU), life: 0 });
+    }
+  }
+  for (let i = 0; i < ambientTarget(); i++) spawnAmbient(true);
+
+  function resize() {
+    W = innerWidth; H = innerHeight;
+    for (const c of [garden, fx, stat]) { c.width = Math.round(W * DPR); c.height = Math.round(H * DPR); }
+    for (const c of [garden, fx]) { c.style.width = W + 'px'; c.style.height = H + 'px'; }
+    for (const x of [gctx, fctx, sctx]) x.setTransform(DPR, 0, 0, DPR, 0, 0);
+    redrawStatic();
+  }
+  let rt;
+  addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 120); });
+  resize();
+
+  /* ---------- cover rose ---------- */
+  const cr = $('#coverRose'), crx = cr.getContext('2d');
+  cr.width = cr.height = 120 * DPR; crx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const coverStart = performance.now();
+  let coverOn = true;
+
+  /* ---------- main loop ---------- */
+  let last = performance.now();
+  function frame(t) {
+    const dt = Math.min(48, t - last) / 16.67; last = t;
+
+    if (live.length || gardenDirty) {
+      gctx.clearRect(0, 0, W, H);
+      gctx.drawImage(stat, 0, 0, W, H);
+      const still = [];
+      for (const r of live) {
+        if (t < r.t0) { still.push(r); continue; }
+        renderRose(gctx, r, t);
+        if (roseState(r, t)[1] >= 1) { renderRose(sctx, r, t); r.done = true; if (r.onDone) r.onDone(r); }
+        else still.push(r);
+      }
+      live = still; gardenDirty = false;
+    }
+
+    let amb = 0;
+    fctx.clearRect(0, 0, W, H);
+    const next = [];
+    for (const p of parts) {
+      if (p.ambient) {
+        p.x += (p.vx + Math.sin(t * .001 + p.ph) * .45) * dt;
+        p.y += p.vy * dt;
+      } else {
+        p.life += dt * 16.67;
+        p.vx *= Math.pow(.985, dt);
+        p.vy = Math.min(p.vy + p.g * dt, 1.3);
+        p.x += (p.vx + Math.sin(t * .002 + p.ph) * .3) * dt;
+        p.y += p.vy * dt;
+      }
+      p.rot += p.vr * dt; p.flip += p.vf * dt;
+      if (p.y > H + 40 || p.x < -60 || p.x > W + 60 || (p.life && p.life > 9000)) continue;
+      if (p.ambient) amb++;
+      next.push(p);
+      fctx.save();
+      fctx.translate(p.x, p.y);
+      fctx.rotate(p.rot);
+      fctx.scale(p.vf ? Math.max(.15, Math.abs(Math.cos(p.flip))) : 1, 1);
+      fctx.globalAlpha = .9;
+      fctx.drawImage(p.spr, -p.s / 2, -p.s / 2, p.s, p.s);
+      fctx.restore();
+    }
+    parts = next;
+    if (amb < ambientTarget() && Math.random() < .08 * dt) spawnAmbient(false);
+
+    if (coverOn) {
+      const e = (t - coverStart) / 2600;
+      crx.clearRect(0, 0, 120, 120);
+      drawRose(crx, 60, 60, 46, RM ? 1 : clamp(e), .3 + Math.sin(t * .0008) * .08, PALS[0]);
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  /* ---------- counter ---------- */
+  let count = 0;
+  const countEl = $('#count');
+  const bump = n => { count += n; countEl.textContent = count; };
+
+  /* ---------- bloom more ---------- */
+  function bloomMore() {
+    const n = W < 600 ? 5 : 8;
+    const xs = Array.from({ length: n }, (_, i) => (i + .5) / n + rand(-.04, .04)).sort(() => Math.random() - .5);
+    xs.forEach((x, i) => addRose(stemRose(clamp(x, .03, .97), rand(.6, .93), {
+      delay: i * 170, onDone: r => burst(r.x * W, r.y * H, 6, true)
+    })));
+    for (let i = 0; i < 3; i++) {
+      const left = Math.random() < .5;
+      addRose(headRose(left ? rand(.03, .2) : rand(.8, .97), rand(.12, .55), {
+        delay: 350 + i * 260, onDone: r => burst(r.x * W, r.y * H, 5, true)
+      }));
+    }
+    burst(W / 2, H - 10, 34, true);
+    bump(n + 3);
+  }
+  const bloomBtn = $('#bloom');
+  bloomBtn.addEventListener('click', () => {
+    bloomMore();
+    bloomBtn.classList.remove('pop'); void bloomBtn.offsetWidth; bloomBtn.classList.add('pop');
+  });
+
+  /* ---------- wishes ---------- */
+  const WISHES = [
+    'Anh chúc bé mèow của anh một ngày 20/10 thật sự vui tươi và tràn đầy tiếng cười',
+    'Chúc bé mèow luôn xinh như đóa hồng Sofia, và lúc nào cũng được cưng như một bé mèo',
+    'Mong em luôn khỏe, luôn cười thật tươi, và mọi việc em làm đều suôn sẻ',
+    'Cảm ơn em đã luôn ở bên anh. Hôm nay và mọi ngày, em là bông hoa đẹp nhất của anh',
+    'Chúc bé mèow ăn ngon, ngủ kỹ, không buồn phiền, chỉ có niềm vui và thật nhiều quà',
+    '20/10 vui vẻ nha bé mèow. Anh thương em nhiều lắm'
+  ];
+  let wi = 0;
+  const wishEl = $('#wish');
+  $('#next').addEventListener('click', () => {
+    wishEl.classList.add('out');
+    setTimeout(() => { wi = (wi + 1) % WISHES.length; wishEl.textContent = WISHES[wi]; wishEl.classList.remove('out'); }, RM ? 0 : 260);
+  });
+
+  /* ---------- cats ---------- */
+  const CATS = [
+    { fur: '#F6E7D8', belly: '#FFF8F1', ear: '#F4B5C2', patch: '#E9C9A6', spot: true, eye: '#3B2630', line: '#3B2630', wh: '#B89A88', acc: 'bow', dance: 'bounce' },
+    { fur: '#F0A867', belly: '#FCE3C6', ear: '#F7B9B9', patch: '#D9823F', stripes: true, eye: '#3B2630', line: '#3B2630', wh: '#8A5A35', acc: 'rose', dance: 'sway' },
+    { fur: '#AFA8B4', belly: '#EEEAF1', ear: '#F2B7C5', patch: '#8D8693', stripes: true, eye: '#3B2630', line: '#3B2630', wh: '#5E5863', acc: 'crown', dance: 'hop' },
+    { fur: '#3E3439', belly: '#FAF6F7', ear: '#E9A4B6', eye: '#E8C35A', pupil: true, line: '#F2DCE3', wh: '#E9DFE3', acc: 'collar', dance: 'wiggle' }
+  ];
+  function catSVG(c) {
+    const acc = {
+      bow: '<g transform="translate(84 24) rotate(18)"><path d="M0 0 L-11 -7 L-11 7 Z M0 0 L11 -7 L11 7 Z" fill="#D46F8B"/><circle r="3.4" fill="#F1A7B8"/></g>',
+      rose: '<g transform="translate(78 120)"><path d="M0 4 L-2 22" stroke="#6E8F5E" stroke-width="2.5" stroke-linecap="round"/><circle r="8" fill="#EA8FA5"/><circle r="5.2" fill="#F6BCC9"/><path d="M-2.5 0 a2.5 2.5 0 1 1 3 2" stroke="#C9637E" stroke-width="1.4" fill="none"/></g>',
+      crown: '<g>' + [[36, 30], [47, 23], [60, 21], [73, 23], [84, 30]].map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${i % 2 ? 5 : 6}" fill="${i % 2 ? '#FDE6EA' : '#EA8FA5'}"/><circle cx="${x}" cy="${y}" r="1.8" fill="#F8D27A"/>`).join('') + '</g>',
+      collar: '<path d="M38 79 Q60 90 82 79" stroke="#D46F8B" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="60" cy="88" r="4" fill="#F8D27A"/>'
+    }[c.acc] || '';
+    const pupils = c.pupil ? '<ellipse cx="47" cy="52" rx="1.8" ry="5" fill="#2A1E24"/><ellipse cx="73" cy="52" rx="1.8" ry="5" fill="#2A1E24"/>' : '';
+    return `<svg viewBox="0 0 120 150" aria-hidden="true">
+      <path class="tail" d="M86 128 C114 124 118 92 102 78" fill="none" stroke="${c.fur}" stroke-width="11" stroke-linecap="round"/>
+      <path d="M30 140 C22 104 36 78 60 78 C84 78 98 104 90 140 Z" fill="${c.fur}"/>
+      <ellipse cx="60" cy="116" rx="17" ry="20" fill="${c.belly}"/>
+      <ellipse cx="46" cy="140" rx="11" ry="6.5" fill="${c.belly}"/><ellipse cx="74" cy="140" rx="11" ry="6.5" fill="${c.belly}"/>
+      <g class="head">
+        <path d="M27 46 L33 12 L54 32 Z" fill="${c.fur}"/><path d="M93 46 L87 12 L66 32 Z" fill="${c.fur}"/>
+        <path d="M33 38 L36 20 L47 31 Z" fill="${c.ear}"/><path d="M87 38 L84 20 L73 31 Z" fill="${c.ear}"/>
+        <ellipse cx="60" cy="52" rx="36" ry="30" fill="${c.fur}"/>
+        ${c.spot ? `<ellipse cx="45" cy="42" rx="13" ry="10" fill="${c.patch}"/>` : ''}
+        ${c.stripes ? `<path d="M52 25 q7 6 0 13 M60 23 v14 M68 25 q-7 6 0 13" stroke="${c.patch}" stroke-width="3.4" fill="none" stroke-linecap="round"/>` : ''}
+        <g class="eyes"><ellipse cx="47" cy="52" rx="5" ry="6.5" fill="${c.eye}"/><ellipse cx="73" cy="52" rx="5" ry="6.5" fill="${c.eye}"/>${pupils}<circle cx="48.6" cy="49.4" r="1.7" fill="#fff"/><circle cx="74.6" cy="49.4" r="1.7" fill="#fff"/></g>
+        <ellipse cx="37" cy="62" rx="6.5" ry="3.8" fill="#F29BB0" opacity=".55"/><ellipse cx="83" cy="62" rx="6.5" ry="3.8" fill="#F29BB0" opacity=".55"/>
+        <path d="M56.5 59 h7 l-3.5 4 Z" fill="#E7849B"/>
+        <path d="M60 63 q-3.5 5 -7.5 1.5 M60 63 q3.5 5 7.5 1.5" stroke="${c.line}" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <path d="M30 58 h-14 M30 63 l-13 3 M90 58 h14 M90 63 l13 3" stroke="${c.wh}" stroke-width="1.2" stroke-linecap="round"/>
+        ${c.acc !== 'rose' && c.acc !== 'collar' ? acc : ''}
+      </g>
+      ${c.acc === 'rose' || c.acc === 'collar' ? acc : ''}
+    </svg>`;
+  }
+  const HEART = '<svg viewBox="0 0 24 24"><path d="M12 21C5 15.5 2 12.3 2 8.6 2 5.8 4.2 3.6 7 3.6c1.9 0 3.5 1 5 2.9 1.5-1.9 3.1-2.9 5-2.9 2.8 0 5 2.2 5 5 0 3.7-3 6.9-10 12.4Z" fill="#E07592"/></svg>';
+  const MEOWS = ['meow~', 'meo meo', 'yêu bé mèow', 'nya~', 'meow ♡'];
+  const catsEl = $('#cats');
+  CATS.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'cat d-' + c.dance;
+    b.setAttribute('aria-label', 'Mèo nhảy múa, chạm để mèo nhảy');
+    b.innerHTML = catSVG(c);
+    b.querySelector('svg').style.animationDelay = (-i * .23) + 's';
+    b.addEventListener('click', () => {
+      b.classList.remove('jump'); void b.offsetWidth; b.classList.add('jump');
+      setTimeout(() => b.classList.remove('jump'), 750);
+      const m = document.createElement('span');
+      m.className = 'meow'; m.textContent = MEOWS[(Math.random() * MEOWS.length) | 0];
+      b.appendChild(m); setTimeout(() => m.remove(), 1350);
+      const rc = b.getBoundingClientRect();
+      burst(rc.left + rc.width / 2, rc.top + rc.height * .3, 10, true);
+    });
+    catsEl.appendChild(b);
+  });
+  if (!RM) setInterval(() => {
+    const cats = catsEl.children;
+    const b = cats[(Math.random() * cats.length) | 0];
+    const h = document.createElement('span');
+    h.className = 'float-heart'; h.innerHTML = HEART;
+    h.style.setProperty('--dx', rand(-24, 24) + 'px');
+    b.appendChild(h); setTimeout(() => h.remove(), 1900);
+  }, 1300);
+  $('#walker').innerHTML = catSVG({ ...CATS[0], acc: 'bow' });
+  $('#coverCat').innerHTML = catSVG(CATS[0]);
+
+  /* ---------- album ---------- */
+  const PHOTOS = [
+    ['IMG_5642', 'tụi mình'], ['IMG_5868', 'bé mèow'], ['IMG_5891', 'bé mèow'], ['IMG_5590', 'bé mèow'],
+    ['IMG_5591', 'bé mèow'], ['IMG_5592', 'bé mèow'], ['IMG_5892', 'bé mèow'], ['IMG_5593', 'bé mèow'],
+    ['IMG_selfie', 'tụi mình'], ['IMG_5797', 'kỷ niệm']
+  ];
+  const pol = $('#pol');
+  PHOTOS.forEach(([f, cap], i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'polaroid';
+    b.style.setProperty('--r', ([-3, 2.5, -1.5, 3, -2.5, 1.5][i % 6]) + 'deg');
+    b.style.setProperty('--tr', ([4, -5, 3, -2][i % 4]) + 'deg');
+    b.setAttribute('aria-label', 'Xem ảnh ' + (i + 1));
+    b.innerHTML = `<img src="./${f}.jpg" alt="Ảnh ${cap} ${i + 1}" loading="lazy" decoding="async"><span class="cap">${cap}</span>`;
+    b.addEventListener('click', () => openLb(i));
+    pol.appendChild(b);
+  });
+  const lb = $('#lb'), lbImg = $('#lbImg');
+  let li = 0, lastFocus = null;
+  function showLb() { lbImg.src = `./${PHOTOS[li][0]}.jpg`; lbImg.alt = `Ảnh ${PHOTOS[li][1]} ${li + 1}`; }
+  function openLb(i) { li = i; lastFocus = document.activeElement; showLb(); lb.hidden = false; $('#lbClose').focus(); }
+  function closeLb() { lb.hidden = true; if (lastFocus) lastFocus.focus(); }
+  $('#lbClose').addEventListener('click', closeLb);
+  $('#lbPrev').addEventListener('click', () => { li = (li - 1 + PHOTOS.length) % PHOTOS.length; showLb(); });
+  $('#lbNext').addEventListener('click', () => { li = (li + 1) % PHOTOS.length; showLb(); });
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  let sx = null;
+  lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (sx == null) return;
+    const dx = e.changedTouches[0].clientX - sx; sx = null;
+    if (Math.abs(dx) > 50) { li = (li + (dx < 0 ? 1 : -1) + PHOTOS.length) % PHOTOS.length; showLb(); }
+  });
+  addEventListener('keydown', e => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') $('#lbPrev').click();
+    if (e.key === 'ArrowRight') $('#lbNext').click();
+  });
+
+  /* ---------- music ---------- */
+  const audio = $('#audio'), musicBtn = $('#music');
+  function setMusic(on) {
+    musicBtn.classList.toggle('on', on);
+    musicBtn.setAttribute('aria-label', on ? 'Tắt nhạc' : 'Bật nhạc');
+  }
+  function play() { const p = audio.play(); if (p && p.then) p.then(() => setMusic(true)).catch(() => setMusic(false)); }
+  musicBtn.addEventListener('click', () => { if (audio.paused) play(); else { audio.pause(); setMusic(false); } });
+
+  /* ---------- open ---------- */
+  let opened = false;
+  const cover = $('#cover');
+  $('#open').addEventListener('click', () => {
+    if (opened) return;
+    opened = true;
+    play();
+    musicBtn.hidden = false;
+    cover.classList.add('gone');
+    setTimeout(() => { cover.hidden = true; coverOn = false; }, RM ? 0 : 950);
+    const n = W < 600 ? 7 : 11;
+    const xs = Array.from({ length: n }, (_, i) => (i + .5) / n + rand(-.03, .03)).sort(() => Math.random() - .5);
+    xs.forEach((x, i) => addRose(stemRose(clamp(x, .03, .97), rand(.62, .93), { delay: 400 + i * 220 })));
+    bump(n);
+    burst(W / 2, H * .45, 40, true);
+  });
+
+  /* ---------- tap to plant ---------- */
+  document.addEventListener('click', e => {
+    if (!opened) return;
+    if (e.target.closest('button, a, .lb, .cover')) return;
+    addRose(headRose(e.clientX / W, e.clientY / H));
+    burst(e.clientX, e.clientY, 9, true);
+    bump(1);
+  });
+})();
+</script>
+
+</body>
+</html>
